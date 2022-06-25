@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: goserver-service
+spec:
+  selector:
+    app: goserver
+  type: LoadBalancer #Ele irá gerar um ip externo, gerará um clusterIp e um NodePort
+  ports:
+  - name: goserver-service
+    port: 80 
+    targetPort: 80
+    protocol: TCP
+
