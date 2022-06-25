@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: goserver-service
+spec:
+  selector:
+    app: goserver
+  type: NodePort
+  ports:
+  - name: goserver-service
+    port: 80 #A porta do service que será acessada
+    targetPort: 80 #A porta do container que está rodando a aplicação (que o service automaticamente redirecionará)
+    protocol: TCP
+    #nodePort precisa ser entre a porta 3000 e 32767
+    nodePort: 30001 #Expõe a porte dos nodes para 3001 que irá direcionar para o service (na porta 80) que irá 
+                    #direcionar ao pod que tem o selector goserver para a porta do targetPort que é onde estará
+                    # a aplicação
