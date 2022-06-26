@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: v1
 kind: Deployment
 metadata:
   name: goserver
@@ -16,10 +16,27 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "brunostel/hello-go:v3"
+          image: "brunostel/hello-go:v4"
+          
           envFrom:
-            - configMapRef:
-                name: goserver-env
+          - configMapRef:
+              name: goserver-env
+          volumeMounts:
+            - mountPath: "go/myfriends"
+              name: config
+      
+      volumes:
+        - name: config
+          configMap:
+            name: configmap-friends
+            items:
+              - key: members
+                path: "friends.txt"
+         
+          # Método 2 - Trazendo todas variáveis de uma única vez
+          # envFrom:
+          #   - configMapRef:
+          #       name: goserver-env
         
           #Método 1 - Trazendo variavel por variável
           # env: 
