@@ -16,5 +16,21 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "brunostel/hello-go:v2"
+          image: "brunostel/hello-go:v3"
+          envFrom:
+            - configMapRef:
+                name: goserver-env
+        
+          #Método 1 - Trazendo variavel por variável
+          # env: 
+          #   - name: NAME
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: goserver-env
+          #         key: NAME
+          #   - name: AGE
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: goserver-env
+          #         key: AGE
     
