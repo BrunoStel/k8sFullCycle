@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: goserver
@@ -16,11 +16,14 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "brunostel/hello-go:v4"
+          image: "brunostel/hello-go:v5"
           
           envFrom:
           - configMapRef:
               name: goserver-env
+          - secretRef:
+              name: goserver-secret
+
           volumeMounts:
             - mountPath: "go/myfriends"
               name: config

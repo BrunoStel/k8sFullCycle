@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	http.HandleFunc("/secrets", Secret)
 	http.HandleFunc("/configmap", ConfigMap)
 	http.HandleFunc("/", Hello)
 	http.ListenAndServe(":80", nil)
@@ -26,4 +27,10 @@ func ConfigMap(w http.ResponseWriter, r *http.Request) {
 		log.Fatalf("Error reading file: ", err)
 	}
 	fmt.Fprintf(w, "My friends: %s.", string(data))
+}
+
+func Secret(w http.ResponseWriter, r *http.Request) {
+	user := os.Getenv("USER")
+	password := os.Getenv("PASSWORD")
+	fmt.Fprintf(w, "%s \n %s.", user, password)
 }
