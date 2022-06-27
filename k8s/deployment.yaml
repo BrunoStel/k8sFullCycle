@@ -17,6 +17,14 @@ spec:
       containers:
         - name: goserver
           image: "brunostel/hello-go:v7"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 3
+            timeoutSeconds: 1
+            successThreshold: 1
           
           envFrom:
           - configMapRef:
