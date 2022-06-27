@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "brunostel/hello-go:v8"
+          image: "brunostel/hello-go:v9"
 
           # Verifica quando a aplicação fica pronta para iniciar o processo, o readiness e liveness aguarda o startup
           startupProbe:
