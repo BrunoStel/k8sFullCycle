@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "brunostel/hello-go:v6"
+          image: "brunostel/hello-go:v7"
           
           envFrom:
           - configMapRef:
