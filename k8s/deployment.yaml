@@ -16,7 +16,25 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "brunostel/hello-go:v7"
+          image: "brunostel/hello-go:v8"
+
+          # Verifica quando a aplicação fica pronta para iniciar o processo, o readiness e liveness aguarda o startup
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 3
+            failureThreshold: 30
+
+        # Verficando se sua aplicação está pronta para receber tráfego
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 3
+            failureThreshold: 1
+
+          # Verificando a saúde da sua applicação
           livenessProbe:
             httpGet:
               path: /healthz
