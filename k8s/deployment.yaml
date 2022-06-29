@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: goserver
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -16,7 +16,15 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "brunostel/hello-go:v9"
+          image: "brunostel/hello-go:v10"
+
+          resources:
+            requests: #Minimo de recursos necessários para UM POD
+              cpu: 100m # 1000m = 1vCPU
+              memory: 20Mi
+            limits: #Máximo que o pod terá de recurso (a depender quanto de recurso o node ainda possui)
+              cpu: 500m
+              memory: 25Mi
 
           # Verifica quando a aplicação fica pronta para iniciar o processo, o readiness e liveness aguarda o startup
           startupProbe:
