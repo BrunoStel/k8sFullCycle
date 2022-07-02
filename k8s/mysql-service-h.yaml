@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-h
+spec:
+  selector:
+    app: mysql
+  ports:
+    - port: 3306
+  clusterIP: None #Dessa forma posso chamar um pod específico que está associado a esse service
+  #ex: ping mysql-1.mysql-h (vai chamar o pod 1 por intermédio do service headless mysql-h)
+    

@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: goserver
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
@@ -61,8 +61,14 @@ spec:
           volumeMounts:
             - mountPath: "app/myfriend"
               name: config
-      
+              readOnly: true
+            - mountPath: "app/pvc"
+              name: goserver-volume
+            
       volumes:
+        - name: goserver-volume
+          persistentVolumeClaim:
+            claimName: goserver-pvc
         - name: config
           configMap:
             name: configmap-friends
